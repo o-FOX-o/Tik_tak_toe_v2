@@ -70,7 +70,8 @@ function checkHorizontal(coordinatesList,player,game){
     let line = {
         length: 1,
         coordinates: [],
-        id: player.id
+        id: player.id,
+        type: 'HZ'
     }
     
     const repitions = [];
@@ -90,7 +91,8 @@ function checkHorizontal(coordinatesList,player,game){
                 line = {
                     length: 1,
                     coordinates: [],
-                    id: player.id
+                    id: player.id,
+                    type: 'HZ'
                 };
                
             }
@@ -103,7 +105,8 @@ function checkHorizontal(coordinatesList,player,game){
             line = {
                     length: 1,
                     coordinates: [],
-                    id: player.id
+                    id: player.id,
+                    type: 'HZ'
                 };
             return current
         }
@@ -121,8 +124,65 @@ function checkHorizontal(coordinatesList,player,game){
 
 
 function checkVirtical(coordinatesList,player,game){
-    // console.log('checking function: 2')
-    return false
+    coordinatesList.sort((a,b)=>{
+        return a.x - b.x
+    })
+    
+    const condition = game.winLinelength;
+
+    
+    let line = {
+        length: 1,
+        coordinates: [],
+        id: player.id,
+        type:'VR'
+    }
+    
+    const repitions = [];
+    coordinatesList.reduce((previous,current,index)=>{
+        const currentX = current.x;
+        const previousX = previous.x;
+        const currentY = current.y;
+        const previousY = previous.y;
+        
+        if(currentX === previousX && currentY === previousY + 1){
+            line.length++
+            line.coordinates.length === 0? line.coordinates.push(previous,current):line.coordinates.push(current);
+            
+            
+            if(line.length === condition ){
+                repitions.push(line);
+                line = {
+                    length: 1,
+                    coordinates: [],
+                    id: player.id,
+                    type:'VR'
+                };
+               
+            }
+            return current 
+        }else {
+
+            line.length === condition?repitions.push(line):null;
+                
+                
+            line = {
+                    length: 1,
+                    coordinates: [],
+                    id: player.id,
+                    type:'VR'
+                };
+            return current
+        }
+    },{x:null,y:null})
+
+
+    repitions.forEach(element => {
+        console.log(element)
+    });
+
+
+     return repitions
 }
 
 function checkDiagolansUp(coordinatesList,player,game){

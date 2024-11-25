@@ -1,6 +1,6 @@
 import examples from './examples.js' ;
 import visuals from './visuals.js';
-import functions from './functions2.js';
+import functions from './functions.js';
 
 
 
@@ -20,6 +20,7 @@ function checkWin(game){
             checkResult ? result.push(checkResult) : null;
         })
     })
+    
     return result
 }
 checkWin(examples.games.game_2)

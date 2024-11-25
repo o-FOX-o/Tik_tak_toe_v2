@@ -74,6 +74,7 @@ function checkHorizontal(coordinatesList,player,game){
     }
     
     const repitions = [];
+
     coordinatesList.reduce((previous,current,index)=>{
         const currentX = current.x;
         const previousX = previous.x;

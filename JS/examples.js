@@ -64,7 +64,7 @@ const boardOf1 = [
     },
     game_2 : {
         players: [player_0,player_1,player_2,player_3],
-        winLinelength: 7,
+        winLinelength: 4,
         gameSize: {
             width:5,
             hight:5
