@@ -105,9 +105,9 @@ function checkHorizontal(coordinatesList,player,game){
     },{x:null,y:null})
 
 
-    // repitions.forEach(element => {
-    //     console.log(element)
-    // });
+    repitions.forEach(element => {
+        console.log(element)
+    });
 
 
      return repitions
