@@ -10,8 +10,3 @@ const conditions = {
     },
     
 }
-
-cosnt
-
-
-

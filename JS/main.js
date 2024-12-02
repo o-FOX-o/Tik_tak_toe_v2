@@ -17,13 +17,13 @@ function checkWin(game){
         
         checking.forEach((checkFunction)=>{
             const checkResult = checkFunction(cellTakenByplayer,player,game);
-            checkResult ? result.push(checkResult) : null;
+            checkResult[0]? result.push(checkResult) : null;
         })
     })
     
     return result
 }
-checkWin(examples.games.game_2)
+checkWin(examples.games.game_1)
 
 
  

@@ -64,15 +64,17 @@ function checkHorizontal(coordinatesList,player,game){
         return a.y - b.y
     })
 
-    const condition = game.winLinelength;
-
-    
-    let line = {
+    const {winLinelength} = game;
+    const {condition} = game;
+    const lineDefault = {
         length: 1,
         coordinates: [],
         id: player.id,
         type: 'HZ'
-    }
+    };
+
+    
+    let line = lineDefault;
     
     const repitions = [];
     coordinatesList.reduce((previous,current,index)=>{
@@ -86,36 +88,26 @@ function checkHorizontal(coordinatesList,player,game){
             line.coordinates.length === 0? line.coordinates.push(previous,current):line.coordinates.push(current);
             
             
-            if(line.length === condition ){
+            if(condition(line.length,winLinelength) || condition(line.length,winLinelength) && index === coordinatesList.length){
                 repitions.push(line);
-                line = {
-                    length: 1,
-                    coordinates: [],
-                    id: player.id,
-                    type: 'HZ'
-                };
+                line = lineDefault;
                
             }
             return current 
         }else {
 
-            line.length === condition?repitions.push(line):null;
+            condition(line.length,winLinelength)?repitions.push(line):null;
                 
                 
-            line = {
-                    length: 1,
-                    coordinates: [],
-                    id: player.id,
-                    type: 'HZ'
-                };
+            line = lineDefault;
             return current
         }
     },{x:null,y:null})
 
 
-    repitions.forEach(element => {
-        console.log(element)
-    });
+    // repitions.forEach(element => {
+    //     console.log(element)
+    // });
 
 
      return repitions
@@ -128,15 +120,15 @@ function checkVirtical(coordinatesList,player,game){
         return a.x - b.x
     })
     
-    const condition = game.winLinelength;
-
-    
-    let line = {
+    const {winLinelength} = game;
+    const {condition} = game;
+    const lineDefault = {
         length: 1,
         coordinates: [],
         id: player.id,
         type:'VR'
     }
+    let line = lineDefault;
     
     const repitions = [];
     coordinatesList.reduce((previous,current,index)=>{
@@ -150,43 +142,90 @@ function checkVirtical(coordinatesList,player,game){
             line.coordinates.length === 0? line.coordinates.push(previous,current):line.coordinates.push(current);
             
             
-            if(line.length === condition ){
+            if(condition(line.length,winLinelength) || condition(line.length,winLinelength) && index === coordinatesList.length){
                 repitions.push(line);
-                line = {
-                    length: 1,
-                    coordinates: [],
-                    id: player.id,
-                    type:'VR'
-                };
+                line = lineDefault;
                
             }
             return current 
         }else {
 
-            line.length === condition?repitions.push(line):null;
+            condition(line.length,winLinelength)?repitions.push(line):null;
                 
                 
-            line = {
-                    length: 1,
-                    coordinates: [],
-                    id: player.id,
-                    type:'VR'
-                };
+            line = lineDefault;
             return current
         }
     },{x:null,y:null})
 
 
-    repitions.forEach(element => {
-        console.log(element)
-    });
+    // repitions.forEach(element => {
+    //     console.log(element)
+    // });
 
 
      return repitions
 }
 
 function checkDiagolansUp(coordinatesList,player,game){
-    // console.log('checking function: 3')
+    const {winLinelength} = game;
+    const {condition} = game;
+    const {width,hight} = game.size;
+    const lineDefault = {
+        length: 1,
+        coordinates: [],
+        id: player.id,
+        type:'D+'
+    };
+
+    coordinatesList.sort((a,b)=>{
+        return a.y - b.y
+    });
+
+    let y = hight - 1
+    let x = 0;
+    while( x < width){
+
+    }
+
+    
+    let line = lineDefault;
+    
+    const repitions = [];
+    coordinatesList.reduce((previous,current,index)=>{
+        const currentX = current.x;
+        const previousX = previous.x;
+        const currentY = current.y;
+        const previousY = previous.y;
+        
+        if(currentX === previousX && currentY === previousY + 1){
+            line.length++
+            line.coordinates.length === 0? line.coordinates.push(previous,current):line.coordinates.push(current);
+            
+            
+            if(condition(line.length,winLinelength) || condition(line.length,winLinelength) && index === coordinatesList.length){
+                repitions.push(line);
+                line = lineDefault;
+               
+            }
+            return current 
+        }else {
+
+            condition(line.length,winLinelength)?repitions.push(line):null;
+                
+                
+            line = lineDefault;
+            return current
+        }
+    },{x:null,y:null})
+
+
+    // repitions.forEach(element => {
+    //     console.log(element)
+    // });
+
+
+
     return false
 }
 

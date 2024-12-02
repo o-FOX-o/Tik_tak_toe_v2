@@ -49,14 +49,25 @@ const boardOf1 = [
     value: 3
   };
 
-  
+  const conditions = {
+    '=': (a,b) => a===b,
+    '<=': (a,b) => a<=b,
+    '>=': (a,b) => a>=b,
+    '!=': (a,b) => a!==b,
+    '>': (a,b) => a>b,
+    '<': (a,b) => a<b,
+    '!': (a,b) => false,
+    'true': (a,b) => true,
+}
+
 
 
   const games = {
     game_1 : {
     players: [player_0,player_1,],
     winLinelength: 3,
-    gameSize: {
+    condition: conditions[">"],
+    size: {
         width:6,
         hight:5
     },
@@ -65,9 +76,9 @@ const boardOf1 = [
     game_2 : {
         players: [player_0,player_1,player_2,player_3],
         winLinelength: 4,
-        gameSize: {
-            width:5,
-            hight:5
+        size: {
+            width:12,
+            hight:12
         },
         board:board12x12
         }
